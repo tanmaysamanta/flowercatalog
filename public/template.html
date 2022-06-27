@@ -10,23 +10,21 @@
     <h1><a href="http://localhost:1234/">&lt;&lt; </a> Guest book </h1>
     <div class="comment">
       <h2>Leave a comment</h2>
-      <form action="comment" method="get">
+      <form action="addcomment" method="get">
         <div>
           <label for='name'>Name:</label>
           <input type='text' name='name'>
         </div>
         <div>
-          <label for='com'>Comment:</label>
-          <textarea name="com" cols="30" rows="5"></textarea>
+          <label for='comment'>Comment:</label>
+          <textarea name="comment" cols="30" rows="5"></textarea>
         </div>
         <div>
           <input type='submit' value='Submit'>
         </div>
-        <div>
-          __COMMENT__
-        </div>
       </form>
     </div>
+    __COMMENT__
   </main>
 </body>
 

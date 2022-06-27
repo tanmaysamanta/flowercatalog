@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Read comments from json file.
+  - [ ] Refactor code
 
 ### DONE
 
@@ -16,3 +16,5 @@
   - [x] Add a guest book page.
   - [x] Implement dynamic handler for comments list.
   - [x] Stored comments data in a json file
+  - [x] Read comments from json file.
+  - [x] Modify commentHandler 
