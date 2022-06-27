@@ -1,5 +1,5 @@
 * {
-  margin: 20px;
+  margin: 10px;
   padding: 0px;
   box-sizing: border-box;
 }
@@ -15,10 +15,11 @@ body {
 
 h1 {
   text-align: center;
+  border-bottom: 1px solid black;
 }
 
 p {
-  width: 500px;
+  width: 700px;
 }
 
 img {
@@ -26,6 +27,15 @@ img {
   width: 700px;
 }
 
+.gif {
+  height: 50px;
+  width: 50px;
+}
+
 a {
   text-decoration: none;
+}
+
+.comment {
+  border-bottom: 1px solid black;
 }

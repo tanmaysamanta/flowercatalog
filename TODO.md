@@ -1,7 +1,7 @@
 ### TODO
 
   - [ ] Add a guest book page.
-  
+
 ### DONE
 
   - [x] Add a simple http server.
@@ -12,3 +12,4 @@
   - [x] Add ancor tag for respective pages
   - [x] Add download option for flower page
   - [x] Add link for go back to home page
+  - [ ] Add css for html page
