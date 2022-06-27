@@ -3,14 +3,12 @@ const { serveFileContent } = require('./serveFileContent');
 
 const commentHandler = (request, response) => {
   const { params } = request;
-  const comments = [];
-  console.log(params);
+  const comments = JSON.parse(fs.readFileSync('./public/comments.json', 'utf8'));
   comments.push(params);
-  console.log(comments);
-  fs.writeFileSync('./public/comments.json', JSON.stringify(comments));
-  const content = `<body>${JSON.parse(comments)}</body>`
-  fs.writeFileSync('./public/comments.html', content);
-  response.setHeaders('location', '/comments.html');
+  const content = JSON.stringify(comments);
+  fs.writeFileSync('./public/comments.json', content);
+  console.log(content);
+  response.setHeaders('location', '/guestbook.html');
   response.statusCode = 301;
   response.send('');
   return true;
@@ -18,7 +16,7 @@ const commentHandler = (request, response) => {
 
 const dynamicHandler = (request, response) => {
   const { uri } = request;
-  if (uri === '/comments.html') {
+  if (uri === '/guestbook.html') {
     return serveFileContent(request, response);
   }
   if (uri === '/addcomment') {

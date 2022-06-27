@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Implement dynamic handler for comments list.
+  - [ ] Read comments from json file.
 
 ### DONE
 
@@ -14,3 +14,5 @@
   - [x] Add link for go back to home page
   - [x] Add css for html page
   - [x] Add a guest book page.
+  - [x] Implement dynamic handler for comments list.
+  - [x] Stored comments data in a json file
