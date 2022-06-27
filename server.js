@@ -1,4 +1,5 @@
 const { createServer } = require('net');
+const { dynamicHandler } = require('./dynamicHandler.js');
 const { parseRequest } = require('./parseRequest.js');
 const { Response } = require('./response.js');
 const { serveFileContent } = require('./serveFileContent.js');
@@ -28,5 +29,5 @@ const startServer = (port, handle, path = './public') => {
   server.listen(port, () => console.log(`Server listening on port ${port}`));
 };
 
-const handlers = [serveFileContent];
+const handlers = [dynamicHandler, serveFileContent];
 startServer(1234, createHandler(handlers), process.argv[2]);

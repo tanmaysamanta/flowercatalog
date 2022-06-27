@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Add a guest book page.
+  - [ ] Implement dynamic handler for comments list.
 
 ### DONE
 
@@ -12,4 +12,5 @@
   - [x] Add ancor tag for respective pages
   - [x] Add download option for flower page
   - [x] Add link for go back to home page
-  - [ ] Add css for html page
+  - [x] Add css for html page
+  - [x] Add a guest book page.
