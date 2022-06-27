@@ -1,9 +1,9 @@
 ### TODO
-
-  - [ ] Created a simple home page.
-
+  - [x] Add ancor tag
 ### DONE
 
-  - [x] Added a simple http server.
-    - [x] Added the request parser.
-    - [x] Added Response class.
+  - [x] Add a simple http server.
+    - [x] Add the request parser.
+    - [x] Add Response class.
+  - [x] Create a simple home page.
+  - [x] Add serveFileContent

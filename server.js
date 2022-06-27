@@ -1,3 +1,8 @@
+const { createServer } = require('net');
+const { parseRequest } = require('./parseRequest.js');
+const { Response } = require('./response.js');
+const { serveFileContent } = require('./serveFileContent.js');
+
 const createHandler = (handlers) => {
   return (request, response, path) => {
     for (const handler of handlers) {
@@ -23,5 +28,5 @@ const startServer = (port, handle, path = './public') => {
   server.listen(port, () => console.log(`Server listening on port ${port}`));
 };
 
-const handlers = [countViewsHandler(), serveFileContent, redirectHandler, dynamicHandler, notFound];
+const handlers = [serveFileContent];
 startServer(1234, createHandler(handlers), process.argv[2]);
