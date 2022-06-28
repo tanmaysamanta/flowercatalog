@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { serveFileContent } = require('./serveFileContent');
-// const html = (text) => `<div>${text}</div>`;
 
 const generateTag = (tag, text) => {
   return `<${tag}>${text}</${tag}>`
@@ -14,8 +13,7 @@ const getTime = () => {
 const formatComment = (comments) => {
   formatedComments = '';
   comments.forEach(comment => {
-    const time = getTime();
-    const text = `${time}  ${comment.name} : ${comment.comment}`
+    const text = `${comment.time}  ${comment.name} : ${comment.comment}`
     formatedComments += generateTag('div', text);
   });
   return formatedComments;
@@ -29,6 +27,8 @@ function updateFile(formatedComments) {
 
 const commentHandler = (request, response) => {
   const { params } = request;
+  const currentTime = getTime();
+  params.time = currentTime;
 
   const comments = JSON.parse(fs.readFileSync('./public/comments.json', 'utf8'));
   comments.unshift(params);

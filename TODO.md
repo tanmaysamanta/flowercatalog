@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Refactor code
+  - [ ] Make a class for comments
 
 ### DONE
 
@@ -17,4 +17,5 @@
   - [x] Implement dynamic handler for comments list.
   - [x] Stored comments data in a json file
   - [x] Read comments from json file.
-  - [x] Modify commentHandler 
+  - [x] Modify commentHandler
+  - [x] Add time for each comment
