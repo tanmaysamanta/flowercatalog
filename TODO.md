@@ -19,3 +19,4 @@
   - [x] Read comments from json file.
   - [x] Modify commentHandler
   - [x] Add time for each comment
+  - [x] Modify html pages
