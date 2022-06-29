@@ -31,38 +31,42 @@ const guestbookHandler = (request, response) => {
   const comments = getComments('./public/comments.json');
   const formatedComments = formatComments(comments);
   const content = getFileContent('./public/template.html', formatedComments);
-  response.setHeaders('content-type', 'text/html')
-  response.send(content);
+  response.setHeader('content-type', 'text/html')
+  response.end(content);
   return true;
 };
 
+const getEntry = (request) => {
+  const comment = {};
+  const entries = request.url.searchParams.entries();
+  for (const entry of entries) {
+    comment[entry[0]] = entry[1];
+  }
+  comment.time = getTime();
+  return comment;
+};
+
 const commentHandler = (request, response) => {
-  const { params } = request;
-  const currentTime = getTime();
-  params.time = currentTime;
-
+  const entry = getEntry(request);
   const comments = getComments('./public/comments.json');
-  comments.unshift(params);
-
+  comments.unshift(entry);
   const content = JSON.stringify(comments);
   fs.writeFileSync('./public/comments.json', content);
-
   const formatedComments = formatComments(comments);
   const fileContent = getFileContent('./public/template.html', formatedComments);
-
-  response.setHeaders('location', '/guestbook');
-  response.setHeaders('content-type', 'text/html')
+  response.setHeader('location', '/guestbook');
+  response.setHeader('content-type', 'text/html')
   response.statusCode = 301;
-  response.send(fileContent);
+  response.end(fileContent);
   return true;
 };
 
 const dynamicHandler = (request, response) => {
-  const { uri } = request;
-  if (uri === '/guestbook') {
+  const pathname = request.url.pathname;
+  if (pathname === '/guestbook') {
     return guestbookHandler(request, response);
   }
-  if (uri === '/addcomment') {
+  if (pathname === '/addcomment') {
     return commentHandler(request, response);
   }
   return false;

@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Make a class for comments
+  - [ ] Add mimeType for content-type 
 
 ### DONE
 
@@ -20,3 +20,6 @@
   - [x] Modify commentHandler
   - [x] Add time for each comment
   - [x] Modify html pages
+  - [x] Connect notFoundHandler to http server
+  - [x] Connect serveFileHandler to http server
+  - [x] Connect dynamicHandler to http server

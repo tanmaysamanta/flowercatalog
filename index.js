@@ -4,5 +4,5 @@ const { serveFileContent } = require('./src/app/serveFileContent.js');
 const { notFound } = require('./src/app/notFoundHandler.js');
 const { createHandler } = require('./src/app/createHandler.js');
 
-const handlers = [dynamicHandler, serveFileContent, notFound];
-startServer(2323, createHandler(handlers));
+const handlers = [serveFileContent, dynamicHandler, notFound];
+startServer(1234, createHandler(handlers));
