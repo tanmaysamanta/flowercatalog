@@ -4,7 +4,7 @@ const serveFileContent = (request, response) => {
   const pathname = request.url.pathname;
   let fileName = `./public${pathname}`;
   if (pathname === '/') {
-    fileName = './public/homePage.html'
+    fileName = './public/index.html'
   }
   if (fs.existsSync(fileName)) {
     const content = fs.readFileSync(fileName);

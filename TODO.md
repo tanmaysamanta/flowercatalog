@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Add mimeType for content-type 
+  - [ ] Add mimeType for content-type
 
 ### DONE
 
@@ -23,3 +23,4 @@
   - [x] Connect notFoundHandler to http server
   - [x] Connect serveFileHandler to http server
   - [x] Connect dynamicHandler to http server
+  - [x] Rename file name homePage.html to index.html
