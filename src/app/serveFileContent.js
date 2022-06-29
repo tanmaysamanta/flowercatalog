@@ -1,8 +1,9 @@
 const fs = require('fs');
 
 const serveFileContent = (request, response) => {
-  let fileName = `./public${request.url.pathname}`;
-  if (request.url.pathname === '/') {
+  const pathname = request.url.pathname;
+  let fileName = `./public${pathname}`;
+  if (pathname === '/') {
     fileName = './public/homePage.html'
   }
   if (fs.existsSync(fileName)) {
