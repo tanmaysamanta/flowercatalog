@@ -24,3 +24,4 @@
   - [x] Connect serveFileHandler to http server
   - [x] Connect dynamicHandler to http server
   - [x] Rename file name homePage.html to index.html
+  - [x] Add logHandler and connect to server

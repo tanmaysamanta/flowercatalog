@@ -5,7 +5,6 @@ const startServer = (port, handler) => {
     const host = request.headers.host;
     const url = request.url;
     request.url = new URL(`http://${host}${url}`);
-    console.log(request.method, request.url.pathname);
     handler(request, response);
   })
   server.listen(port, () => console.log(`Server listening on port ${port}`));

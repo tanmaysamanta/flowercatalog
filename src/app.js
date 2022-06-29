@@ -1,6 +1,6 @@
 const { dynamicHandler } = require('./app/dynamicHandler.js');
 const { serveFileContent } = require('./app/serveFileContent.js');
-const { notFound } = require('./app/notFoundHandler.js');
+const { notFound, logHandler } = require('./app/notFoundHandler.js');
 
 const createHandler = (handlers) => {
   return (request, response) => {
@@ -13,7 +13,7 @@ const createHandler = (handlers) => {
   };
 };
 
-const handlers = [serveFileContent, dynamicHandler, notFound];
+const handlers = [logHandler, serveFileContent, dynamicHandler, notFound];
 const handler = createHandler(handlers);
 
 module.exports = { handler };
