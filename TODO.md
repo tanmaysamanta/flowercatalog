@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Add mimeType for content-type
+  - [ ] Use try-catch block for readFile
 
 ### DONE
 
@@ -26,3 +26,4 @@
   - [x] Rename file name homePage.html to index.html
   - [x] Add logHandler and connect to server
   - [x] Add a router
+  - [x] Add mimeType for content-type
