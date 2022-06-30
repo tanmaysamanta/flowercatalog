@@ -18,22 +18,13 @@ const formatComments = (comments) => {
   return formatedComments;
 };
 
-const getComments = (fileName) => {
-  return JSON.parse(fs.readFileSync(fileName, 'utf8'));
+const getPreviousComments = (fileName) => {
+  return JSON.parse(fs.readFileSync(fileName, 'utf8')) || [];
 };
 
 const getFileContent = (fileName, newContent) => {
   const content = fs.readFileSync(fileName, 'utf8');
   return content.replace('__COMMENT__', generateTag('div', newContent));
-};
-
-const guestbookHandler = (request, response) => {
-  const comments = getComments('./public/comments.json');
-  const formatedComments = formatComments(comments);
-  const content = getFileContent('./public/template.html', formatedComments);
-  response.setHeader('content-type', 'text/html')
-  response.end(content);
-  return true;
 };
 
 const getEntry = (request) => {
@@ -48,28 +39,39 @@ const getEntry = (request) => {
 
 const commentHandler = (request, response) => {
   const entry = getEntry(request);
-  const comments = getComments('./public/comments.json');
+  const comments = getPreviousComments(request.commentsFile);
   comments.unshift(entry);
   const content = JSON.stringify(comments);
-  fs.writeFileSync('./public/comments.json', content);
+  fs.writeFileSync(request.commentsFile, content);
   const formatedComments = formatComments(comments);
-  const fileContent = getFileContent('./public/template.html', formatedComments);
+  const fileContent = getFileContent('./resource/template.html', formatedComments);
   response.setHeader('location', '/guestbook');
   response.setHeader('content-type', 'text/html')
-  response.statusCode = 301;
+  response.statusCode = 302;
   response.end(fileContent);
   return true;
 };
 
-const dynamicHandler = (request, response) => {
+const showGuestBook = (request, response) => {
+  const comments = getPreviousComments(request.commentsFile);
+  const formatedComments = formatComments(comments);
+  const content = getFileContent('./resource/template.html', formatedComments);
+  response.setHeader('content-type', 'text/html')
+  response.end(content);
+  return true;
+};
+
+const guestBookHandler = (commentsFile) => (request, response) => {
   const pathname = request.url.pathname;
-  if (pathname === '/guestbook') {
-    return guestbookHandler(request, response);
+  if (pathname === '/guestbook' && request.method === 'GET') {
+    request.commentsFile = commentsFile;
+    return showGuestBook(request, response);
   }
-  if (pathname === '/addcomment') {
+  if (pathname === '/addcomment' && request.method === 'GET') {
+    request.commentsFile = commentsFile;
     return commentHandler(request, response);
   }
   return false;
 };
 
-module.exports = { dynamicHandler };
+module.exports = { guestBookHandler };
