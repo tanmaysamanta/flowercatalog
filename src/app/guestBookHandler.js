@@ -29,7 +29,7 @@ const getFileContent = (fileName, newContent) => {
 
 const getEntry = (request) => {
   const comment = {};
-  const entries = request.url.searchParams.entries();
+  const entries = request.bodyParams.entries();
   for (const entry of entries) {
     comment[entry[0]] = entry[1];
   }
@@ -61,17 +61,31 @@ const showGuestBook = (request, response) => {
   return true;
 };
 
-const guestBookHandler = (commentsFile) => (request, response) => {
+const addCommentHandler = (request, response) => {
+  let data = '';
+  request.setEncoding('utf8');
+  request.on('data', (chunk) => {
+    data += chunk;
+  })
+  request.on('end', () => {
+    const bodyParams = new URLSearchParams(data);
+    request.bodyParams = bodyParams;
+    console.log(bodyParams);
+    return commentHandler(request, response);
+  })
+}
+
+const guestBook = (commentsFile) => (request, response, next) => {
   const pathname = request.url.pathname;
   if (pathname === '/guestbook' && request.method === 'GET') {
     request.commentsFile = commentsFile;
     return showGuestBook(request, response);
   }
-  if (pathname === '/addcomment' && request.method === 'GET') {
+  if (pathname === '/addcomment' && request.method === 'POST') {
     request.commentsFile = commentsFile;
-    return commentHandler(request, response);
+    return addCommentHandler(request, response);
   }
-  return false;
+  next(request, response);
 };
 
-module.exports = { guestBookHandler };
+module.exports = { guestBook };

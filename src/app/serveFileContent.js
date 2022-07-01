@@ -14,7 +14,7 @@ const getMimeType = (extension) => {
   return mimeTypes[extension] || 'text/plain';
 };
 
-const serveFileContent = rootSource => (request, response) => {
+const serveFileContent = rootSource => (request, response, next) => {
   const pathname = request.url.pathname;
   const fileName = pathname === '/' ? '/index.html' : pathname;
   const filePath = path.join(rootSource, fileName);
@@ -22,12 +22,13 @@ const serveFileContent = rootSource => (request, response) => {
   const mimeType = getMimeType(extension);
 
   if (fs.existsSync(filePath)) {
-    const content = fs.readFileSync(filePath);
-    response.setHeader('Content-Type', mimeType);
-    response.end(content);
-    return true;
+    fs.readFile(filePath, (error, content) => {
+      response.setHeader('Content-Type', mimeType);
+      response.end(content);
+    });
+  } else {
+    next(request, response);
   }
-  return false;
 };
 
 module.exports = { serveFileContent };
