@@ -1,17 +1,16 @@
-const { guestBook } = require('./app/guestBookHandler.js');
+const fs = require('fs');
+const { guestBookHandler } = require('./app/guestBookHandler.js');
 const { serveFileContent } = require('./app/serveFileContent.js');
 const { notFound, logHandler } = require('./app/notFoundHandler.js');
 const { createRouter } = require('./server/router.js');
+const { Guestbook } = require('./app/guestBook.js');
 
-// const handlers = [
-//   logHandler,
-//   serveFileContent('./public'),
-//   guestBookHandler('./data/comments.json'),
-//   notFound
-// ];
+const comments = JSON.parse(fs.readFileSync('./data/comments.json', 'utf8'));
+const guestbook = new Guestbook(comments);
+
 const app = createRouter(logHandler,
   serveFileContent('./public'),
-  guestBook('./data/comments.json'),
+  guestBookHandler(guestbook),
   notFound);
 
 module.exports = { app };

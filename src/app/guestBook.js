@@ -4,7 +4,7 @@ class Guestbook {
   }
 
   addComment(comment) {
-    this.comments.unShift(comment);
+    this.comments.unshift(comment);
   }
 
   toString() {

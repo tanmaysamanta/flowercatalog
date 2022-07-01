@@ -27,4 +27,5 @@
   - [x] Add logHandler and connect to server
   - [x] Add a router
   - [x] Add mimeType for content-type
-  - [ ] Modify guestBookHandler
+  - [x] Modify guestBookHandler
+  - [x] Added guestBook class
