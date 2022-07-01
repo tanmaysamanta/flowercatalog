@@ -9,7 +9,7 @@ const notFound = (request, response) => {
 
 const logHandler = (request, response, next) => {
   console.log(request.method, request.url.pathname);
-  next(request, response);
+  next();
 };
 
 module.exports = { notFound, logHandler };

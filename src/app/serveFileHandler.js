@@ -21,13 +21,16 @@ const serveFileContent = rootSource => (request, response, next) => {
   const extension = path.extname(fileName);
   const mimeType = getMimeType(extension);
 
-  if (fs.existsSync(filePath)) {
+  if (fs.existsSync(filePath) && request.method === 'GET') {
     fs.readFile(filePath, (error, content) => {
+      if (error) {
+        next();
+      }
       response.setHeader('Content-Type', mimeType);
       response.end(content);
     });
   } else {
-    next(request, response);
+    next();
   }
 };
 
