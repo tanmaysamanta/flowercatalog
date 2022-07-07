@@ -40,15 +40,24 @@ const showGuestBook = (request, response) => {
 
 const guestBookHandler = (guestBook) => (request, response, next) => {
   const pathname = request.url.pathname;
+
+  if (pathname === '/guestbook' && !request.session) {
+    response.setHeader('location', '/login');
+    response.statusCode = 302;
+    response.end('');
+    return true;
+  }
+
   if (pathname === '/guestbook' && request.method === 'GET') {
     request.guestBook = guestBook;
     return showGuestBook(request, response);
   }
+
   if (pathname === '/addcomment' && request.method === 'POST') {
     request.guestBook = guestBook;
     return addComment(request, response);
   }
-  next(request, response);
+  next();
 };
 
 module.exports = { guestBookHandler };

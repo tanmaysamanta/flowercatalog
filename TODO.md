@@ -1,6 +1,6 @@
 ### TODO
 
-  - [ ] Use try-catch block for readFile
+  - [ ] Implement logout handler
 
 ### DONE
 
@@ -29,3 +29,4 @@
   - [x] Add mimeType for content-type
   - [x] Modify guestBookHandler
   - [x] Added guestBook class
+  - [x] Add login handler

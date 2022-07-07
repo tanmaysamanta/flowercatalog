@@ -4,11 +4,23 @@ const { serveFileContent } = require('./app/serveFileHandler.js');
 const { notFound, logHandler } = require('./app/notFoundHandler.js');
 const { createRouter } = require('./server/router.js');
 const { Guestbook } = require('./app/guestBook.js');
+const { injectCookies } = require('./app/cookiesHandler.js');
+const { injectSession } = require('./app/injectSession.js');
+const { loginHandler } = require('./app/loginHandler.js');
+const { loginPageHandler } = require('./app/loginPageHandler.js');
+const { injectBodyParams } = require('./app/bodyParamsHandler.js');
 
 const comments = JSON.parse(fs.readFileSync('./data/comments.json', 'utf8'));
 const guestbook = new Guestbook(comments);
 
-const app = createRouter(logHandler,
+const sessions = {};
+const app = createRouter(
+  logHandler,
+  injectBodyParams,
+  injectCookies,
+  injectSession(sessions),
+  loginHandler(sessions),
+  loginPageHandler,
   serveFileContent('./public'),
   guestBookHandler(guestbook),
   notFound);
