@@ -7,7 +7,7 @@ const logoutHandler = sessions => (request, response, next) => {
       return;
     }
 
-    delete sessions[session];
+    delete sessions[session.sessionId];
     response.setHeader('get-cookie', `sessionId=${session.sessionId};max-age=0`);
     response.statusCode = 302;
     response.setHeader('location', '/');
