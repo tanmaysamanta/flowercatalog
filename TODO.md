@@ -1,6 +1,5 @@
 ### TODO
 
-  - [ ] Implement logout handler
 
 ### DONE
 
@@ -30,3 +29,4 @@
   - [x] Modify guestBookHandler
   - [x] Added guestBook class
   - [x] Add login handler
+  - [x] Implement logout handler

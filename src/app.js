@@ -9,6 +9,7 @@ const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
 const { loginPageHandler } = require('./app/loginPageHandler.js');
 const { injectBodyParams } = require('./app/bodyParamsHandler.js');
+const { logoutHandler } = require('./app/logoutHandler.js');
 
 const comments = JSON.parse(fs.readFileSync('./data/comments.json', 'utf8'));
 const guestbook = new Guestbook(comments);
@@ -21,6 +22,7 @@ const app = createRouter(
   injectSession(sessions),
   loginHandler(sessions),
   loginPageHandler,
+  logoutHandler(sessions),
   serveFileContent('./public'),
   guestBookHandler(guestbook),
   notFound);

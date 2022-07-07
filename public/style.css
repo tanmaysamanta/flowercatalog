@@ -39,3 +39,9 @@ a {
 .comment {
   border-bottom: 1px solid black;
 }
+
+.logout {
+  width: 80px;
+  height: 20px;
+  border: 1px solid black;
+}
