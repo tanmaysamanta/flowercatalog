@@ -3,6 +3,21 @@
 <head>
   <title>Flower Catalog</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      const hideForSecond = (jar) => {
+        jar.style.visibility = 'hidden';
+        setTimeout(() => {
+          jar.style.visibility = 'visible';
+        }, 1000);
+      }
+      const main = () => {
+        const jar = document.getElementById('jar');
+        jar.addEventListener('click', () => hideForSecond(jar));
+      }
+      window.onload = main;
+    })();
+  </script>
 </head>
 
 <body>
@@ -21,7 +36,7 @@
         <li>
           <a href="agerantum.html">Agerantum</a>
         </li>
-        <img class="gif" src="images/animated-flower-image-0021.gif" alt="gif">
+        <img id="jar" class="gif" src="images/animated-flower-image-0021.gif" alt="gif">
         <li>
           <a href="guestbook">Guest book</a>
         </li>

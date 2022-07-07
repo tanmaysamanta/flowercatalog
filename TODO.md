@@ -30,3 +30,4 @@
   - [x] Added guestBook class
   - [x] Add login handler
   - [x] Implement logout handler
+  - [x] Implement hide functionality on jar
