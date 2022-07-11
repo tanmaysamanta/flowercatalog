@@ -20,7 +20,7 @@ const formatComments = (comments) => {
 
 const getFileContent = (fileName, newContent) => {
   const content = fs.readFileSync(fileName, 'utf8');
-  return content.replace('__COMMENT__', generateTag('div', newContent));
+  return content.replace('__COMMENT__', newContent);
 };
 
 const getEntry = (request) => {

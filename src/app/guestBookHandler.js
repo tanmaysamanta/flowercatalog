@@ -1,32 +1,7 @@
-const { getEntry,
+const {
   getFileContent,
   persistDB,
   formatComments } = require('./utils.js')
-
-const commentHandler = (request, response) => {
-  const { guestBook } = request;
-  const entry = getEntry(request);
-  guestBook.addComment(entry);
-  persistDB(guestBook);
-
-  response.setHeader('location', '/guestbook');
-  response.statusCode = 302;
-  response.end('');
-  return true;
-};
-
-const addComment = (request, response) => {
-  let data = '';
-  request.setEncoding('utf8');
-  request.on('data', (chunk) => {
-    data += chunk;
-  })
-  request.on('end', () => {
-    const bodyParams = new URLSearchParams(data);
-    request.bodyParams = bodyParams;
-    return commentHandler(request, response);
-  })
-};
 
 const showGuestBook = (request, response) => {
   const { guestBook } = request;
@@ -36,6 +11,18 @@ const showGuestBook = (request, response) => {
   response.setHeader('content-type', 'text/html')
   response.end(content);
   return true;
+};
+
+const addComment = (request, response) => {
+  const { guestBook } = request;
+  const { bodyParams } = request;
+
+  bodyParams.time = new Date().toLocaleString();
+  response.setHeader('Content-type', 'plain/text');
+  guestBook.addComment(bodyParams);
+  persistDB(guestBook);
+  response.end(JSON.stringify(guestBook.toString()));
+  return;
 };
 
 const guestBookHandler = (guestBook) => (request, response, next) => {
@@ -53,7 +40,7 @@ const guestBookHandler = (guestBook) => (request, response, next) => {
     return showGuestBook(request, response);
   }
 
-  if (pathname === '/addcomment' && request.method === 'POST') {
+  if (pathname === '/add-comment' && request.method === 'POST') {
     request.guestBook = guestBook;
     return addComment(request, response);
   }

@@ -3,6 +3,7 @@
 <head>
   <title>Guest book</title>
   <link rel="stylesheet" href="style.css">
+  <script src="addComment.js"></script>
 </head>
 
 <body>
@@ -13,21 +14,25 @@
     </div>
     <div class="comment">
       <h2>Leave a comment</h2>
-      <form action="addcomment" method="post">
+      <form id="log" enctype="multipart/form-data">
         <div>
-          <label for='name'>Name:</label>
-          <input type='text' name='name'>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" />
         </div>
         <div>
-          <label for='comment'>Comment:</label>
-          <textarea name="comment" cols="30" rows="5"></textarea>
+          <label for="comment">Comment:</label>
+          <textarea name="comment" id="comment" cols="30" rows="5"></textarea>
         </div>
         <div>
-          <input type='submit' value='Submit'>
+          <button type="button" id="button">Submit</button>
         </div>
       </form>
     </div>
-    __COMMENT__
+    <div id="comments-list">
+      <div id="comments">
+        __COMMENT__
+      </div>
+    </div>
   </main>
 </body>
 
