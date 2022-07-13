@@ -10,12 +10,14 @@ const { loginHandler } = require('./app/loginHandler.js');
 const { loginPageHandler } = require('./app/loginPageHandler.js');
 const { injectBodyParams } = require('./app/bodyParamsHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
+const { parseUrl } = require("./app/parseUrl");
 
 const comments = JSON.parse(fs.readFileSync('./data/comments.json', 'utf8'));
 const guestbook = new Guestbook(comments);
 
 const sessions = {};
 const app = createRouter(
+  parseUrl,
   logHandler,
   injectBodyParams,
   injectCookies,
