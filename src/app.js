@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { guestBookHandler } = require('./app/guestBookHandler.js');
 const { serveFileContent } = require('./app/serveFileHandler.js');
 const { notFound, logHandler } = require('./app/notFoundHandler.js');

@@ -74,3 +74,21 @@ describe('GET /login', () => {
       .expect(302, done)
   });
 });
+
+describe('POST /login-page', () => {
+  it('should return 302 status code on GET /login', (done) => {
+    const config = {};
+    const sessions = {
+      12345: {
+        username: 'abc',
+        sessionId: 12345
+      }
+    }
+    request(app(config, sessions))
+      .post('/login-page')
+      .send('user=abc')
+      .set('Cookie', 'sessionId=12345')
+      .expect('Location', '/guestbook')
+      .expect(302, done)
+  });
+});
