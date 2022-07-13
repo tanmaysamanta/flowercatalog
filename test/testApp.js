@@ -28,4 +28,12 @@ describe('test app', () => {
       .expect(/Agerantum/)
       .expect(200, done)
   });
+
+  it('should return 200 status code on GET /login', (done) => {
+    request(app)
+      .get('/login')
+      .expect('Content-Type', /html/)
+      .expect('Content-Length', '295')
+      .expect(200, done)
+  });
 });
