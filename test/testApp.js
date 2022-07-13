@@ -36,4 +36,21 @@ describe('test app', () => {
       .expect('Content-Length', '295')
       .expect(200, done)
   });
+
+  it('should return 400 status code on GET /logout when session unavailable', (done) => {
+    request(app)
+      .get('/logout')
+      .expect('Content-Type', 'text/plain')
+      .expect('Content-Length', '11')
+      .expect('Bad request')
+      .expect(400, done)
+  });
+
+  it('should return 404 status code on GET /somthingWrong', (done) => {
+    request(app)
+      .get('/somethingWrong')
+      .expect('Content-Type', /html/)
+      .expect('Content-Length', '44')
+      .expect(404, done)
+  });
 });

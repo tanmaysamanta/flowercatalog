@@ -15,8 +15,8 @@ const { parseUrl } = require("./app/parseUrl");
 const comments = JSON.parse(fs.readFileSync('./data/comments.json', 'utf8'));
 const guestbook = new Guestbook(comments);
 const loginPage = fs.readFileSync('./resource/loginPage.html', 'utf8');
-
 const sessions = {};
+
 const app = createRouter(
   parseUrl,
   logHandler,

@@ -3,6 +3,7 @@ const logoutHandler = sessions => (request, response, next) => {
   if (url.pathname === '/logout' && method === 'GET') {
     if (!session) {
       response.statusCode = 400;
+      response.setHeader('content-type', 'text/plain');
       response.end('Bad request');
       return;
     }
