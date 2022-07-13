@@ -33,9 +33,9 @@ const getEntry = (request) => {
   return comment;
 };
 
-const persistDB = (guestBook) => {
+const persistDB = (guestBook, fileName) => {
   const content = guestBook.toString();
-  fs.writeFileSync('data/comments.json', content);
+  fs.writeFileSync(fileName, content);
 };
 
 module.exports = { getEntry, getFileContent, persistDB, formatComments };

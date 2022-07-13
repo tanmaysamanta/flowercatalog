@@ -22,7 +22,7 @@ const app = (config, sessions = {}) => {
     loginHandler(sessions),
     loginPageHandler,
     logoutHandler(sessions),
-    guestBookHandler(guestBook),
+    guestBookHandler(guestBook, config.commentsFile),
     serveFileContent(config.source),
     notFound);
   return router;

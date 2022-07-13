@@ -120,3 +120,25 @@ describe('GET /guestbook', () => {
       .expect(302, done)
   });
 });
+
+describe('POST /add-comment', () => {
+  it('should return 200 status code with guestbook page', (done) => {
+    const config = {
+      comments: [{ "name": "modhu", "comment": "morning", "time": "13/07/2022, 09:58:22" }],
+      commentsFile: './test/comments.json'
+    };
+    const sessions = {
+      12345: {
+        username: 'abc',
+        sessionId: 12345
+      }
+    }
+    request(app(config, sessions))
+      .post('/add-comment')
+      .set('Cookie', 'sessionId=12345')
+      .send('name=sonu&comment=hello')
+      .expect('Content-type', 'text/plain')
+      .expect(/sonu/)
+      .expect(200, done)
+  });
+});

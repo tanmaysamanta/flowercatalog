@@ -18,15 +18,16 @@ const addComment = (request, response) => {
   const { bodyParams } = request;
 
   bodyParams.time = new Date().toLocaleString();
-  response.setHeader('Content-type', 'plain/text');
+  response.setHeader('Content-type', 'text/plain');
   guestBook.addComment(bodyParams);
-  persistDB(guestBook);
+  persistDB(guestBook, request.commentsFile);
   response.end(JSON.stringify(guestBook.toString()));
   return;
 };
 
-const guestBookHandler = (guestBook) => (request, response, next) => {
+const guestBookHandler = (guestBook, commentsFile) => (request, response, next) => {
   const pathname = request.url.pathname;
+  request.commentsFile = commentsFile;
 
   if (pathname === '/guestbook' && !request.session) {
     response.setHeader('location', '/login');
