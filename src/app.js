@@ -12,17 +12,18 @@ const { logoutHandler } = require('./app/logoutHandler.js');
 const { parseUrl } = require("./app/parseUrl");
 
 const app = (config, sessions = {}) => {
-  const guestbook = new Guestbook(config.comments);
+  const guestBook = new Guestbook(config.comments);
   const router = createRouter(
     parseUrl,
+    logHandler(config.logger),
     injectBodyParams,
     injectCookies,
     injectSession(sessions),
     loginHandler(sessions),
     loginPageHandler,
     logoutHandler(sessions),
+    guestBookHandler(guestBook),
     serveFileContent(config.source),
-    guestBookHandler(guestbook),
     notFound);
   return router;
 };

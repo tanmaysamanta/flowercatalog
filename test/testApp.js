@@ -92,3 +92,31 @@ describe('POST /login-page', () => {
       .expect(302, done)
   });
 });
+
+describe('GET /guestbook', () => {
+  it('should return 200 status code with guestbook page', (done) => {
+    const config = {
+      comments: [{ "name": "modhu", "comment": "morning", "time": "13/07/2022, 09:58:22" }],
+    };
+    const sessions = {
+      12345: {
+        username: 'abc',
+        sessionId: 12345
+      }
+    }
+    request(app(config, sessions))
+      .get('/guestbook')
+      .set('Cookie', 'sessionId=12345')
+      .expect('Content-type', /html/)
+      .expect(/Guest book/)
+      .expect(200, done)
+  });
+
+  it('should return 302 status code and redirected to login page', (done) => {
+    const config = {};
+    request(app(config))
+      .get('/guestbook')
+      .expect('Location', '/login')
+      .expect(302, done)
+  });
+});

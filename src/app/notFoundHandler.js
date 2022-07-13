@@ -7,8 +7,10 @@ const notFound = (request, response) => {
   return true;
 };
 
-const logHandler = (request, response, next) => {
-  console.log(request.method, request.url.pathname);
+const logHandler = logger => (request, response, next) => {
+  if (logger) {
+    logger(request.method, request.url.pathname);
+  }
   next();
 };
 
