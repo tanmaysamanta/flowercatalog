@@ -4,7 +4,7 @@ const { app } = require('../src/app');
 
 describe('GET /somthingWrong', () => {
   it('should return 404 status code on GET /somthingWrong', (done) => {
-    const config = { source: './public' };
+    const config = { source: './public', commentsFile: './test/comments.json' };
     request(app(config))
       .get('/somethingWrong')
       .expect('Content-Type', /html/)
@@ -15,7 +15,7 @@ describe('GET /somthingWrong', () => {
 
 describe('GET /', () => {
   it('should return 200 status code on GET / ', (done) => {
-    const config = { source: './public' };
+    const config = { source: './public', commentsFile: './test/comments.json' };
     request(app(config))
       .get('/')
       .expect('Content-Type', /html/)
@@ -27,7 +27,7 @@ describe('GET /', () => {
 
 describe('GET /abeliophyllum.html', () => {
   it('should return 200 status code on GET /abeliophyllum.html', (done) => {
-    const config = { source: './public' };
+    const config = { source: './public', commentsFile: './test/comments.json' };
     request(app(config))
       .get('/abeliophyllum.html')
       .expect('Content-Type', /html/)
@@ -39,7 +39,7 @@ describe('GET /abeliophyllum.html', () => {
 
 describe('GET /agerantum.html', () => {
   it('should return 200 status code on GET /agerantum.html', (done) => {
-    const config = { source: './public' };
+    const config = { source: './public', commentsFile: './test/comments.json' };
     request(app(config))
       .get('/agerantum.html')
       .expect('Content-Type', /html/)
@@ -51,7 +51,7 @@ describe('GET /agerantum.html', () => {
 
 describe('GET /login', () => {
   it('should return 200 status code on GET /login', (done) => {
-    const config = {};
+    const config = { commentsFile: './test/comments.json' };
     request(app(config))
       .get('/login')
       .expect('Content-Type', /html/)
@@ -60,7 +60,7 @@ describe('GET /login', () => {
   });
 
   it('should return 302 status code on GET /login', (done) => {
-    const config = {};
+    const config = { commentsFile: './test/comments.json' };
     const sessions = {
       12345: {
         username: 'abc',
@@ -77,7 +77,7 @@ describe('GET /login', () => {
 
 describe('POST /login-page', () => {
   it('should return 302 status code on GET /login', (done) => {
-    const config = {};
+    const config = { commentsFile: './test/comments.json' };
     const sessions = {
       12345: {
         username: 'abc',
@@ -96,7 +96,7 @@ describe('POST /login-page', () => {
 describe('GET /guestbook', () => {
   it('should return 200 status code with guestbook page', (done) => {
     const config = {
-      comments: [{ "name": "modhu", "comment": "morning", "time": "13/07/2022, 09:58:22" }],
+      commentsFile: './test/comments.json'
     };
     const sessions = {
       12345: {
@@ -113,7 +113,7 @@ describe('GET /guestbook', () => {
   });
 
   it('should return 302 status code and redirected to login page', (done) => {
-    const config = {};
+    const config = { commentsFile: './test/comments.json' };
     request(app(config))
       .get('/guestbook')
       .expect('Location', '/login')
@@ -124,7 +124,6 @@ describe('GET /guestbook', () => {
 describe('POST /add-comment', () => {
   it('should return 200 status code with guestbook page', (done) => {
     const config = {
-      comments: [{ "name": "modhu", "comment": "morning", "time": "13/07/2022, 09:58:22" }],
       commentsFile: './test/comments.json'
     };
     const sessions = {

@@ -1,5 +1,6 @@
 ### TODO
 
+  - [ ] consider a template module
 
 ### DONE
 

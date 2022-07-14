@@ -4,9 +4,9 @@ const { app } = require('./src/app.js');
 
 const config = {
   source: './public',
-  comments: JSON.parse(fs.readFileSync('./data/comments.json', 'utf8')),
-  logger: console.log,
   commentsFile: './data/comments.json'
 };
 
-startServer(1234, app(config));
+const sessions = {};
+
+startServer(1234, app(config, sessions, console.log));
