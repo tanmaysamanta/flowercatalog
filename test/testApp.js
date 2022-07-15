@@ -5,7 +5,7 @@ const { createApp } = require('../src/app');
 describe('GET /somthingWrong', () => {
   it('should return 404 status code on GET /somthingWrong', (done) => {
     const config = { commentsFile: './test/comments.json' };
-    request(createApp(config, {}, console.log))
+    request(createApp(config, {}))
       .get('/somethingWrong')
       .expect('Content-Type', /html/)
       .expect(404, done)
@@ -135,7 +135,7 @@ describe('POST /add-comment', () => {
       .post('/add-comment')
       .set('Cookie', 'sessionId=12345')
       .send('name=sonu&comment=hello')
-      .expect('Content-type', 'text/plain')
+      .expect('Content-type', 'text/plain; charset=utf-8')
       .expect(200, done)
   });
 });

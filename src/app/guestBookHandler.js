@@ -8,7 +8,7 @@ const showGuestBook = (request, response) => {
   const comments = JSON.parse(guestBook.toString());
   const formatedComments = formatComments(comments);
   const content = getFileContent('./resource/template.html', formatedComments);
-  response.setHeader('content-type', 'text/html')
+  response.type('text/html')
   response.end(content);
   return true;
 };
@@ -18,7 +18,7 @@ const addComment = (request, response) => {
   const { bodyParams } = request;
 
   bodyParams.time = new Date().toLocaleString();
-  response.setHeader('Content-type', 'text/plain');
+  response.type('text/plain');
   guestBook.addComment(bodyParams);
   persistDB(guestBook, request.commentsFile);
   response.end(JSON.stringify(guestBook.toString()));
@@ -30,9 +30,7 @@ const guestBookHandler = (guestBook, commentsFile) => (request, response) => {
   request.commentsFile = commentsFile;
 
   if (!request.session) {
-    response.setHeader('location', '/login');
-    response.statusCode = 302;
-    response.end('');
+    response.redirect('/login');
     return;
   }
   request.guestBook = guestBook;

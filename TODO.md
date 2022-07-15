@@ -33,3 +33,4 @@
   - [x] Implement logout handler
   - [x] Implement hide functionality on jar
   - [x] Use express web famework
+  - [x] Use res.cookie and res.clearCookie for set and clear cokkie

@@ -22,13 +22,11 @@ const loginPage = `<html lang="en">
 const loginPageHandler = (request, response) => {
   const session = request.session;
   if (!session) {
-    response.setHeader('Content-Type', 'text/html');
+    response.type('text/html');
     response.end(loginPage);
     return;
   }
-  response.setHeader('location', '/guestbook');
-  response.statusCode = 302;
-  response.end('');
+  response.redirect('/guestbook');
   return;
 };
 

@@ -25,10 +25,10 @@ const createApp = (config, sessions = {}, logger) => {
   app.use(handleLog);
   app.use(express.urlencoded({ extended: true }));
   app.use(injectBodyParams);
-
   app.use(injectCookies);
   app.use(injectSession(sessions));
   app.use(express.static('public'));
+
   app.get('/guestbook', handleGuestBook);
   app.get('/login', loginPageHandler);
   app.post('/login', handleLogin);
