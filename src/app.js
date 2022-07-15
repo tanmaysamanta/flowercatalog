@@ -11,6 +11,16 @@ const { logoutHandler } = require('./app/logoutHandler.js');
 
 const express = require('express');
 
+const createLoginRouter = sessions => {
+  const handleLogin = loginHandler(sessions);
+
+  const loginRouter = express.Router();
+  loginRouter.get('/', loginPageHandler);
+  loginRouter.post('/', handleLogin);
+
+  return loginRouter;
+};
+
 const createApp = (config, sessions = {}, logger) => {
 
   const app = express();
@@ -18,9 +28,9 @@ const createApp = (config, sessions = {}, logger) => {
   const guestBook = new Guestbook(comments);
   const handleLog = logHandler(logger);
   const handleGuestBook = guestBookHandler(guestBook, config.commentsFile);
-  const handleLogin = loginHandler(sessions);
   const handleLogout = logoutHandler(sessions);
-  const handleAddComment = addCommentHandler(guestBook, config.commentsFile)
+  const handleAddComment = addCommentHandler(guestBook, config.commentsFile);
+  const loginRouter = createLoginRouter(sessions);
 
   app.use(handleLog);
   app.use(express.urlencoded({ extended: true }));
@@ -29,9 +39,8 @@ const createApp = (config, sessions = {}, logger) => {
   app.use(injectSession(sessions));
   app.use(express.static('public'));
 
+  app.use('/login', loginRouter);
   app.get('/guestbook', handleGuestBook);
-  app.get('/login', loginPageHandler);
-  app.post('/login', handleLogin);
   app.get('/logout', handleLogout);
   app.post('/add-comment', handleAddComment);
 
