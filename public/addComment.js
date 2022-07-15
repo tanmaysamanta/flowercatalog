@@ -29,7 +29,7 @@ const addComment = (form) => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => showComments(xhr);
 
-  xhr.open("post", "/add-comment");
+  xhr.open("post", "/guestbook");
   xhr.send(body);
   form.reset();
 };

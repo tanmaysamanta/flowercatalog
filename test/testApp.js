@@ -120,7 +120,7 @@ describe('GET /guestbook', () => {
   });
 });
 
-describe('POST /add-comment', () => {
+describe('POST /guestbook', () => {
   it('should return 200 status code with guestbook page', (done) => {
     const config = {
       commentsFile: './test/comments.json'
@@ -132,7 +132,7 @@ describe('POST /add-comment', () => {
       }
     }
     request(createApp(config, sessions))
-      .post('/add-comment')
+      .post('/guestbook')
       .set('Cookie', 'sessionId=12345')
       .send('name=sonu&comment=hello')
       .expect('Content-type', 'text/plain; charset=utf-8')
