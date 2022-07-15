@@ -5,7 +5,7 @@ const loginPage = `<html lang="en">
 </head>
 
 <body>
-  <form action="/login-page" method="post">
+  <form action="/login" method="post">
     <div>
       <label for='user'>Name:</label>
       <input type='text' name='user'>
@@ -19,21 +19,17 @@ const loginPage = `<html lang="en">
 
 </html>`
 
-const loginPageHandler = (req, res, next) => {
-  const { pathname } = req.url;
-  const session = req.session;
-  if (!session && pathname === '/login') {
-    res.setHeader('Content-Type', 'text/html');
-    res.end(loginPage);
+const loginPageHandler = (request, response) => {
+  const session = request.session;
+  if (!session) {
+    response.setHeader('Content-Type', 'text/html');
+    response.end(loginPage);
     return;
   }
-  if (session && pathname === '/login') {
-    res.setHeader('location', '/guestbook');
-    res.statusCode = 302;
-    res.end('');
-    return;
-  }
-  next();
+  response.setHeader('location', '/guestbook');
+  response.statusCode = 302;
+  response.end('');
+  return;
 };
 
 module.exports = { loginPageHandler };

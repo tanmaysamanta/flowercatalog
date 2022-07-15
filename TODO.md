@@ -32,3 +32,4 @@
   - [x] Add login handler
   - [x] Implement logout handler
   - [x] Implement hide functionality on jar
+  - [x] Use express web famework

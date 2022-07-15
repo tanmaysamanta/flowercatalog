@@ -25,27 +25,24 @@ const addComment = (request, response) => {
   return;
 };
 
-const guestBookHandler = (guestBook, commentsFile) => (request, response, next) => {
-  const pathname = request.url.pathname;
+
+const guestBookHandler = (guestBook, commentsFile) => (request, response) => {
   request.commentsFile = commentsFile;
 
-  if (pathname === '/guestbook' && !request.session) {
+  if (!request.session) {
     response.setHeader('location', '/login');
     response.statusCode = 302;
     response.end('');
-    return true;
+    return;
   }
-
-  if (pathname === '/guestbook' && request.method === 'GET') {
-    request.guestBook = guestBook;
-    return showGuestBook(request, response);
-  }
-
-  if (pathname === '/add-comment' && request.method === 'POST') {
-    request.guestBook = guestBook;
-    return addComment(request, response);
-  }
-  next();
+  request.guestBook = guestBook;
+  return showGuestBook(request, response);
 };
 
-module.exports = { guestBookHandler };
+const addCommentHandler = (guestBook, commentsFile) => (request, response) => {
+  request.guestBook = guestBook;
+  request.commentsFile = commentsFile;
+  return addComment(request, response);
+};
+
+module.exports = { guestBookHandler, addCommentHandler };

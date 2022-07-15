@@ -1,12 +1,11 @@
-const fs = require('fs');
-const { startServer } = require('./src/server/server.js');
-const { app } = require('./src/app.js');
+const { createApp } = require('./src/app');
 
 const config = {
-  source: './public',
   commentsFile: './data/comments.json'
 };
-
 const sessions = {};
+const logger = console.log
 
-startServer(1234, app(config, sessions, console.log));
+const app = createApp(config, sessions, logger);
+
+app.listen(1234, () => console.log('Server is listening on 1234'));
